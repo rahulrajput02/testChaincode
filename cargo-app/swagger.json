@@ -1,0 +1,787 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Cargo Track & Trace Hyperledger Blockchain APIs",
+        "description": "Cargo Track & Trace Hyperledger Blockchain APIs",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:8000",
+    "basePath": "",
+    "tags": [
+        {
+            "name": "Users",
+            "description": "APIs for users in the system"
+        },
+        {
+            "name": "Cargo Track & Trace",
+            "description": "APIs for tracking and tracing Cargo in the system"
+        },
+        {
+            "name": "Container Track & Trace",
+            "description": "APIs for tracking and tracing Container in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/registerParticipant": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "description": "Register new user in system",
+                "summary": "Register new user in system",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "User that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/register_participant"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New user is created",
+                        "schema": {
+                            "$ref": "#/definitions/register_participant"
+                        }
+                    }
+                }
+            }
+        },
+        "/getParticipants/{key}": {
+            "parameters": [
+                {
+                    "name": "key",
+                    "in": "path",
+                    "required": true,
+                    "description": "Hash ID of user that we want to find",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user with given Hash ID",
+                "responses": {
+                    "200": {
+                        "description": "User is found"
+                    }
+                }
+            }
+        },
+        "/addNewContainer": {
+            "post": {
+                "tags": [
+                    "Container Track & Trace"
+                ],
+                "summary": "Create and assign a new Container to Transporter",
+                "description": "Create and assign a new Container to Transporter",
+                "parameters": [
+                    {
+                        "name": "createContainer",
+                        "in": "body",
+                        "description": "Container creation and assignment",
+                        "schema": {
+                            "$ref": "#/definitions/createContainer"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Container created and assigned to Transporter.",
+                        "schema": {
+                            "$ref": "#/definitions/createContainer"
+                        }
+                    }
+                }
+            }
+        },
+        "/loadContainerWithPackages": {
+            "put": {
+                "tags": [
+                    "Container Track & Trace"
+                ],
+                "description": "Packages loading in Container",
+                "summary": "Packages loading in Container",
+                "parameters": [
+                    {
+                        "name": "loadContainer",
+                        "in": "body",
+                        "description": "Container loading with packages",
+                        "schema": {
+                            "$ref": "#/definitions/loadContainer"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Container loaded with packages.",
+                        "schema": {
+                            "$ref": "#/definitions/loadContainer"
+                        }
+                    }
+                }
+            }
+        },
+        "/createCargoLoadContainers": {
+            "put": {
+                "tags": [
+                    "Cargo Track & Trace"
+                ],
+                "description": "Create Cargo and load Containers in it.",
+                "summary": "Create Cargo and load Containers in it.",
+                "parameters": [
+                    {
+                        "name": "cargo",
+                        "in": "body",
+                        "description": "Cargo creation",
+                        "schema": {
+                            "$ref": "#/definitions/cargoCreation"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cargo created and loaded with containers.",
+                        "schema": {
+                            "$ref": "#/definitions/cargoCreation"
+                        }
+                    }
+                }
+            }
+        },
+        "/updateCargoAttributes": {
+            "put": {
+                "tags": [
+                    "Cargo Track & Trace"
+                ],
+                "description": "Update Cargo details",
+                "summary": "Update Cargo details",
+                "parameters": [
+                    {
+                        "name": "cargo",
+                        "in": "body",
+                        "description": "Cargo details to update",
+                        "schema": {
+                            "$ref": "#/definitions/updateCargo"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cargo details updated.",
+                        "schema": {
+                            "$ref": "#/definitions/updateCargo"
+                        }
+                    }
+                }
+            }
+        },
+        "/updateCargoCoordinates": {
+            "put": {
+                "tags": [
+                    "Cargo Track & Trace"
+                ],
+                "description": "Update Cargo Coordinates",
+                "summary": "Update Cargo Coordinates",
+                "parameters": [
+                    {
+                        "name": "cargoCordinates",
+                        "in": "body",
+                        "description": "Cargo coordinates to update",
+                        "schema": {
+                            "$ref": "#/definitions/updateCoordinates"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cargo coordinates updated.",
+                        "schema": {
+                            "$ref": "#/definitions/updateCoordinates"
+                        }
+                    }
+                }
+            }
+        },
+        "/changeCargoCustody": {
+            "put": {
+                "tags": [
+                    "Cargo Track & Trace"
+                ],
+                "description": "Change Cargo custody to another user",
+                "summary": "Change Cargo custody to another user",
+                "parameters": [
+                    {
+                        "name": "cargo",
+                        "in": "body",
+                        "description": "Cargo ID and new owner name",
+                        "schema": {
+                            "$ref": "#/definitions/cargoCustody"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cargo custody changed.",
+                        "schema": {
+                            "$ref": "#/definitions/cargoCustody"
+                        }
+                    }
+                }
+            }
+        },
+        "/updateContainerAttributes": {
+            "put": {
+                "tags": [
+                    "Container Track & Trace"
+                ],
+                "description": "Update details of an existing Container",
+                "summary": "Update details of an existing Container",
+                "parameters": [
+                    {
+                        "name": "container",
+                        "in": "body",
+                        "description": "Container details to update",
+                        "schema": {
+                            "$ref": "#/definitions/updateContainer"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Container details updated.",
+                        "schema": {
+                            "$ref": "#/definitions/updateContainer"
+                        }
+                    }
+                }
+            }
+        },
+        "/changeContainerCustody": {
+            "put": {
+                "tags": [
+                    "Container Track & Trace"
+                ],
+                "description": "Change Container custody to another user",
+                "summary": "Change Container custody to another user",
+                "parameters": [
+                    {
+                        "name": "container",
+                        "in": "body",
+                        "description": "Container ID and new owner name",
+                        "schema": {
+                            "$ref": "#/definitions/unloadContainer"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Container custody changed.",
+                        "schema": {
+                            "$ref": "#/definitions/unloadContainer"
+                        }
+                    }
+                }
+            }
+        },
+        "/unloadContainerFromCargo": {
+            "put": {
+                "tags": [
+                    "Container Track & Trace"
+                ],
+                "description": "Unload a Container from a Cargo",
+                "summary": "Unload a Container from a Cargo",
+                "parameters": [
+                    {
+                        "name": "container",
+                        "in": "body",
+                        "description": "Container that we want to unload from Cargo",
+                        "schema": {
+                            "$ref": "#/definitions/unloadContainer"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Container unloaded.",
+                        "schema": {
+                            "$ref": "#/definitions/unloadContainer"
+                        }
+                    }
+                }
+            }
+        },
+        "/traceCargo/{cargoId}": {
+            "parameters": [
+                {
+                    "name": "cargoId",
+                    "in": "path",
+                    "required": true,
+                    "description": "Cargo ID of Cargo that we want to trace",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Cargo Track & Trace"
+                ],
+                "summary": "Trace a Cargo by its Cargo Id",
+                "responses": {
+                    "200": {
+                        "description": "Cargo data found"
+                    }
+                }
+            }
+        },
+        "/trackCargoDetails/{cargoId}": {
+            "parameters": [
+                {
+                    "name": "cargoId",
+                    "in": "path",
+                    "required": true,
+                    "description": "Cargo ID of Cargo that we want to track",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Cargo Track & Trace"
+                ],
+                "summary": "Track a Cargo by its Cargo Id",
+                "responses": {
+                    "200": {
+                        "description": "Cargo data found"
+                    }
+                }
+            }
+        },
+        "/traceContainer/{containerId}": {
+            "parameters": [
+                {
+                    "name": "containerId",
+                    "in": "path",
+                    "required": true,
+                    "description": "Container ID of Container that we want to trace",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Container Track & Trace"
+                ],
+                "summary": "Trace a Container by its Container Id",
+                "responses": {
+                    "200": {
+                        "description": "Container data found"
+                    }
+                }
+            }
+        },
+        "/trackContainerDetails/{containerId}": {
+            "parameters": [
+                {
+                    "name": "containerId",
+                    "in": "path",
+                    "required": true,
+                    "description": "Container ID of Container that we want to track",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Container Track & Trace"
+                ],
+                "summary": "Track a Container by its Container Id",
+                "responses": {
+                    "200": {
+                        "description": "Container data found"
+                    }
+                }
+            }
+        },
+        "/getAvilableContainers/": {
+            "parameters": [
+                {}
+            ],
+            "get": {
+                "tags": [
+                    "Container Track & Trace"
+                ],
+                "summary": "Get list of Available Containers",
+                "responses": {
+                    "200": {
+                        "description": "Containers are found"
+                    }
+                }
+            }
+        },
+        "/getLoadedContainers/": {
+            "parameters": [
+                {}
+            ],
+            "get": {
+                "tags": [
+                    "Container Track & Trace"
+                ],
+                "summary": "Get list of Loaded Containers",
+                "responses": {
+                    "200": {
+                        "description": "Containers are found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "register_participant": {
+            "required": [
+                "hashId",
+                "name",
+                "email",
+                "role"
+            ],
+            "properties": {
+                "hashId": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "role": {
+                    "type": "string"
+                }
+            }
+        },
+        "unloadContainer": {
+            "required": [
+                "key",
+                "holder"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "holder": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateContainer": {
+            "required": [
+                "key",
+                "timestamp",
+                "manufacturer",
+                "status",
+                "loadedItems",
+                "customClearanceStatus",
+                "shippedFrom",
+                "shippedTo",
+                "containerLocation"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "timestamp": {
+                    "type": "string"
+                },
+                "manufacturer": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "loadedItems": {
+                    "type": "string"
+                },
+                "customClearanceStatus": {
+                    "type": "string"
+                },
+                "shippedFrom": {
+                    "type": "string"
+                },
+                "shippedTo": {
+                    "type": "string"
+                },
+                "containerLocation": {
+                    "type": "string"
+                }
+            }
+        },
+        "cargoCustody": {
+            "required": [
+                "key",
+                "owner"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "owner": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateCoordinates": {
+            "required": [
+                "key",
+                "timestamp",
+                "cargoLocation"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "timestamp": {
+                    "type": "string"
+                },
+                "cargoLocation": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateCargo": {
+            "required": [
+                "key",
+                "txnId",
+                "timestamp",
+                "shippedFrom",
+                "shippedTo",
+                "transportationType",
+                "containerQty",
+                "associatedContainerHashIds",
+                "status"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "txnId": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "string"
+                },
+                "shippedFrom": {
+                    "type": "string"
+                },
+                "shippedTo": {
+                    "type": "string"
+                },
+                "transportationType": {
+                    "type": "string"
+                },
+                "containerQty": {
+                    "type": "string"
+                },
+                "associatedContainerHashIds": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "cargoCreation": {
+            "required": [
+                "key",
+                "txnId",
+                "timestamp",
+                "cargoId",
+                "shippedFrom",
+                "shippedTo",
+                "cargoLocation",
+                "transportationType",
+                "containerQty",
+                "owner",
+                "associatedContainerHashIds",
+                "status"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "txnId": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "string"
+                },
+                "cargoId": {
+                    "type": "string"
+                },
+                "shippedFrom": {
+                    "type": "string"
+                },
+                "shippedTo": {
+                    "type": "string"
+                },
+                "cargoLocation": {
+                    "type": "string"
+                },
+                "transportationType": {
+                    "type": "string"
+                },
+                "containerQty": {
+                    "type": "string"
+                },
+                "owner": {
+                    "type": "string"
+                },
+                "associatedContainerHashIds": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "loadContainer": {
+            "required": [
+                "key",
+                "timestamp",
+                "status",
+                "loadedItems",
+                "customClearanceStatus",
+                "shippedFrom",
+                "shippedTo",
+                "containerLocation"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "timestamp": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "loadedItems": {
+                    "type": "string"
+                },
+                "customClearanceStatus": {
+                    "type": "string"
+                },
+                "shippedFrom": {
+                    "type": "string"
+                },
+                "shippedTo": {
+                    "type": "string"
+                },
+                "containerLocation": {
+                    "type": "string"
+                }
+            }
+        },
+        "createContainer": {
+            "required": [
+                "key",
+                "timestamp",
+                "manufacturer",
+                "status",
+                "loadedItems",
+                "owner",
+                "cargoId",
+                "customClearanceStatus",
+                "shippedFrom",
+                "shippedTo",
+                "containerLocation"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "timestamp": {
+                    "type": "string"
+                },
+                "manufacturer": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "loadedItems": {
+                    "type": "string"
+                },
+                "owner": {
+                    "type": "string"
+                },
+                "cargoId": {
+                    "type": "string"
+                },
+                "customClearanceStatus": {
+                    "type": "string"
+                },
+                "shippedFrom": {
+                    "type": "string"
+                },
+                "shippedTo": {
+                    "type": "string"
+                },
+                "containerLocation": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
