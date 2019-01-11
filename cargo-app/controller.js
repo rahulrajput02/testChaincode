@@ -368,7 +368,7 @@ return{
 		});
 	},
 
-	getParticipants: function(req, res){
+	getParticipant: function(req, res){
 
 		var fabric_client = new Fabric_Client();
 		var key = req.params.key
@@ -410,7 +410,7 @@ return{
 		    const request = {
 		        chaincodeId: 'cargo-app',
 		        txId: tx_id,
-		        fcn: 'getParticipants',
+		        fcn: 'getParticipant',
 		        args: [key]
 		    };
 

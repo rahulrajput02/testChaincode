@@ -11,8 +11,8 @@ module.exports = function(app){
   app.post('/addNewContainer/', jsonParser, function(req, res){
     cargo.addNewContainer(req, res);
   });
-  app.get('/getParticipants/:key', function(req, res){
-    cargo.getParticipants(req, res);
+  app.get('/getParticipant/:key', function(req, res){
+    cargo.getParticipant(req, res);
   });
   app.put('/loadContainerWithPackages/', jsonParser, function(req, res){
     cargo.loadContainerWithPackages(req, res);

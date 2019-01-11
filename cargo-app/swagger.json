@@ -65,7 +65,7 @@
                 }
             }
         },
-        "/getParticipants/{key}": {
+        "/getParticipant/{key}": {
             "parameters": [
                 {
                     "name": "key",

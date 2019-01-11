@@ -178,7 +178,7 @@ func (s *SmartContract) addNewContainer(APIstub shim.ChaincodeStubInterface, arg
 	return shim.Success(nil)
 }
 
-func (s *SmartContract) getParticipants(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
+func (s *SmartContract) getParticipant(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")
